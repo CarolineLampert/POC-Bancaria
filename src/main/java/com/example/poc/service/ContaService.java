@@ -20,11 +20,8 @@ public class ContaService {
 
     @Autowired
     private final ContaRepository contaRepository;
-    private TransacaoRepository transacaoRepository;
-
     public ContaService(ContaRepository contaRepository, TransacaoRepository transacaoRepository){
         this.contaRepository = contaRepository;
-        this.transacaoRepository = transacaoRepository;
     }
     
     public ResponseEntity<String> cadastrarConta(Conta conta) {
@@ -86,12 +83,7 @@ public class ContaService {
         return this.contaRepository.encerrarConta(idConta);
     }
 
-    public boolean excluirConta(Long idConta){
-        String numeroConta = contaRepository.obterNumeroContaPorId(idConta);
-        
-        if (transacaoRepository.verificaConta(numeroConta)){
-            throw new IllegalArgumentException("Não é possível deletar a conta, existem transações associadas.");
-        }
+    public boolean excluirConta(Long idConta){ 
         return this.contaRepository.excluirConta(idConta);
     }
 }

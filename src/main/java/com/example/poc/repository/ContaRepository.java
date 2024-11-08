@@ -93,14 +93,7 @@ public class ContaRepository{
 
         return false;
     }
-
-    @SuppressWarnings("deprecation")
-    public String obterNumeroContaPorId(Long idConta) {
-        String sql = "SELECT NumeroConta FROM conta WHERE idConta = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{idConta}, String.class);
-    }
     
-
     private static class ContaRowMapper implements RowMapper<Conta> {
         @SuppressWarnings("null")
         @Override
